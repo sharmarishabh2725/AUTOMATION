@@ -1,0 +1,26 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+# Start browser (old style)
+browser = webdriver.Edge()
+try:
+  browser.get("https://www.browserstack.com/users/sign_up")
+  time.sleep(13)
+  full_name = browser.find_element(By.NAME, "user[full_name]")
+  full_name.send_keys("SHARMA RISHABH")
+  time.sleep(1)
+  email = browser.find_element(By.NAME, "user[email]")
+  email.send_keys("25162122004@gnu.ac.in")
+  time.sleep(2)
+  password = browser.find_element(By.NAME, "user[password]")
+  password.send_keys("123456@abc")
+  time.sleep(3)
+  checkbox = browser.find_element(By.NAME, "terms_and_conditions")
+  checkbox.click()
+  time.sleep(3)
+  signup = browser.find_element(By.NAME, "commit")
+  signup.click()
+  time.sleep(20)
+finally:
+  browser.quit()
+
