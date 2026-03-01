@@ -1,0 +1,28 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+driver = webdriver.Chrome()
+driver.get("https://www.amazon.in/")
+time.sleep(3)
+search_box = driver.find_element(By.ID, "twotabsearchtextbox")
+search_box.send_keys("laptop")
+search_box.send_keys(Keys.RETURN)
+time.sleep(5)
+products = driver.find_elements(By.XPATH, "//div[@data-component-type='s-search-result']")
+print("Total Products:", len(products))
+count = 1
+for product in products:
+    try:
+        title = product.find_element(By.TAG_NAME, "h2").text
+        price = product.find_element(By.CLASS_NAME, "a-price-whole").text
+        
+        print("Product", count)
+        print("Name:", title)
+        print("Price: ₹", price)
+        print("-------------------")
+        count += 1
+    except:
+        continue
+
+driver.quit()
